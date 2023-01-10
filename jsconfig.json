@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES6",
+
+    /*  For IntelliSense on Webpack aliases
+     *  https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases
+     */
+    "baseUrl": ".",
+    "paths": {
+      "src": ["./src/"]
+    }
+  },
+  "include": ["./src/**/*"]
+}

@@ -1,6 +1,7 @@
 import './tailwind/styles.css';
 import { E } from './dom.js';
 import { SearchBar } from './components/SearchBar.js';
+import { Disclaimer } from './components/Disclaimer.js';
 
 function App() {
   let classes = [
@@ -9,7 +10,12 @@ function App() {
   ];
 
   return E('div', { class: classes[0] }, [
-    E('div', { class: classes[1] }, [E('header', [SearchBar()])]),
+    E('div', { class: classes[1] }, [
+      /*  */
+      E('header', [SearchBar()]),
+      E('div', { class: 'flex-1' }), // Temporary spacer
+      E('footer', [Disclaimer()]),
+    ]),
   ]);
 }
 

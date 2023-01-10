@@ -1,6 +1,7 @@
 /* prettier-ignore */
 const words = `
 tailwindcss
+heroicons
 `.trim().split('\n');
 
 /** @type {import('@cspell/cspell-types').CSpellSettings} */

@@ -14,6 +14,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: '☁',
+      template: './src/view/index.ejs',
     }),
     new MiniCssExtractPlugin(),
   ],

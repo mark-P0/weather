@@ -12,3 +12,5 @@ class Event {
     this.#subscribers.push(callback);
   }
 }
+
+export const LoadingEvent = new Event();

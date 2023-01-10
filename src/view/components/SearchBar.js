@@ -1,3 +1,4 @@
+import { LoadingEvent } from 'src/controller/events.js';
 import { E } from '../dom.js';
 import { MagnifyingGlassIcon } from '../tailwind/heroicons.js';
 
@@ -26,6 +27,7 @@ export function SearchBar() {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    LoadingEvent.publish(true);
   });
 
   return form;

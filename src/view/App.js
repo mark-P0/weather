@@ -2,6 +2,7 @@ import './tailwind/styles.css';
 import { E } from './dom.js';
 import { SearchBar } from './components/SearchBar.js';
 import { ArrowPrompt } from './components/ArrowPrompt.js';
+import { InfoView } from './components/InfoView.js';
 import { Disclaimer } from './components/Disclaimer.js';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       E('main', { class: 'flex-1 px-3' }, [
         /*  */
         ArrowPrompt(),
+        InfoView(),
       ]),
       E('footer', [Disclaimer()]),
     ]),

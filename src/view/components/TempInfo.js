@@ -1,10 +1,19 @@
 import { kelvin2celsius, kelvin2fahrenheit } from 'src/utilities.js';
-import { WeatherUpdateEvent } from 'src/controller/events.js';
+import {
+  WeatherUpdateEvent,
+  TempUnitChangeEvent,
+  TempUpdateEvent,
+} from 'src/controller/events.js';
 import { E } from '../dom.js';
 
-/* TODO: Swap between converters! */
 /** @type {kelvin2celsius | kelvin2fahrenheit} */
 let converter = kelvin2celsius;
+TempUnitChangeEvent.subscribe(async (data) => {
+  if (data === 'C') converter = kelvin2celsius;
+  else if (data === 'F') converter = kelvin2fahrenheit;
+  else return;
+  TempUpdateEvent.publish(null);
+});
 
 /** @type {(data: number | undefined) => string} */
 function data2temp(data) {
@@ -27,6 +36,7 @@ function MinMax() {
     maxBase = data?.main?.temp_max;
     updateTemp();
   });
+  TempUpdateEvent.subscribe(updateTemp);
 
   return E('p', { class: 'flex gap-2 text-xs font-thin text-stone-400' }, [
     E('span', 'Min ', [min]),
@@ -62,6 +72,7 @@ function FeelsLike() {
     tempBase = data?.main?.feels_like;
     updateTemp();
   });
+  TempUpdateEvent.subscribe(updateTemp);
 
   return E('p', { class: 'text-xs font-thin text-stone-400' }, [
     'Feels like ',
@@ -109,12 +120,17 @@ function MainTemp() {
     tempBase = data?.main?.temp;
     updateTemp();
   });
+  TempUpdateEvent.subscribe(updateTemp);
 
   const buttons = E(
     'div',
     { class: 'flex [&>*]:flex-1 flex-col justify-around ml-1' },
     [Radio('unit', 'C', true), Radio('unit', 'F')]
   );
+  buttons.addEventListener('click', ({ target }) => {
+    if (!(target instanceof HTMLLabelElement)) return;
+    TempUnitChangeEvent.publish(target.textContent);
+  });
 
   return E('div', { class: 'flex items-center' }, [img, temp, buttons]);
 }

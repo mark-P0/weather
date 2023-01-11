@@ -15,3 +15,5 @@ class Event {
 
 export const LoadingEvent = new Event();
 export const WeatherUpdateEvent = new Event();
+export const TempUnitChangeEvent = new Event();
+export const TempUpdateEvent = new Event();

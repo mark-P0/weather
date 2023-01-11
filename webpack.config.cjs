@@ -16,6 +16,9 @@ module.exports = {
       src: path.resolve(__dirname, 'src/'),
     },
   },
+  experiments: {
+    topLevelAwait: true,
+  },
 
   plugins: [
     new HtmlWebpackPlugin({

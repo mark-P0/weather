@@ -26,3 +26,13 @@ export function deg2compass(deg) {
   const dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   return dirs[eqv % 16];
 }
+
+/** @type {(K: number) => number} */
+export function kelvin2celsius(K) {
+  return K - 273.15;
+}
+
+/** @type {(K: number) => number} */
+export function kelvin2fahrenheit(K) {
+  return kelvin2celsius(K) * (9 / 5) + 32;
+}

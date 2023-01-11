@@ -36,3 +36,9 @@ export function kelvin2celsius(K) {
 export function kelvin2fahrenheit(K) {
   return kelvin2celsius(K) * (9 / 5) + 32;
 }
+
+/** @type {(value: any) => boolean} */
+export function isNullish(value) {
+  /* Can `??` be used here? */
+  return value === null || value === undefined;
+}

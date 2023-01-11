@@ -1,4 +1,4 @@
-import { deg2compass } from 'src/utilities.js';
+import { deg2compass, isNullish } from 'src/utilities.js';
 import { WeatherUpdateEvent } from 'src/controller/events.js';
 import { E } from '../dom.js';
 
@@ -34,7 +34,11 @@ export function MiscInfo() {
 
     let deg = data?.wind?.deg;
     let speed = data?.wind?.speed;
-    wind[0](deg && speed ? `${deg2compass(deg)} ${speed}` : '...');
+    wind[0](
+      !isNullish(deg) && !isNullish(speed)
+        ? `${deg2compass(deg)} ${speed}`
+        : '...'
+    );
   });
 
   return E('section', { class: 'grid grid-cols-[3fr_4fr] gap-5 px-4' }, [

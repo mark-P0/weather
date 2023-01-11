@@ -4,6 +4,7 @@ import { SearchBar } from './components/SearchBar.js';
 import { ArrowPrompt } from './components/ArrowPrompt.js';
 import { SkeletonView } from './components/SkeletonView.js';
 import { InfoView } from './components/InfoView.js';
+import { NotFoundView } from './components/NotFoundView.js';
 import { Disclaimer } from './components/Disclaimer.js';
 
 function App() {
@@ -16,10 +17,10 @@ function App() {
     E('div', { class: classes[1] }, [
       E('header', [SearchBar()]),
       E('main', { class: 'flex-1 px-3' }, [
-        /*  */
         ArrowPrompt(),
         SkeletonView(),
         InfoView(),
+        NotFoundView(),
       ]),
       E('footer', [Disclaimer()]),
     ]),

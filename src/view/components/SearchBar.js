@@ -1,5 +1,9 @@
 import { current } from 'src/model/openweathermap.js';
-import { LoadingEvent, WeatherUpdateEvent } from 'src/controller/events.js';
+import {
+  LoadingEvent,
+  WeatherUpdateEvent,
+  NotFoundEvent,
+} from 'src/controller/events.js';
 import { E } from '../dom.js';
 import { MagnifyingGlassIcon } from '../tailwind/heroicons.js';
 
@@ -28,6 +32,7 @@ export function SearchBar() {
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
     LoadingEvent.publish(true);
 
     const raw = new FormData(form);
@@ -40,8 +45,8 @@ export function SearchBar() {
       }
       const data = await current(search);
       WeatherUpdateEvent.publish(data);
-      console.log(data);
     } catch (error) {
+      NotFoundEvent.publish(search);
       console.error(error);
     }
 

@@ -27,6 +27,7 @@ export function SearchBar() {
   let attrs = {
     class:
       'flex items-center border-2 border-stone-300 rounded-lg px-3 py-2 gap-3 focus-within:border-stone-500',
+    autocomplete: 'off',
   };
   const form = E('form', attrs, [Input(), Button()]);
 

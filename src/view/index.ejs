@@ -18,11 +18,18 @@
 
   <body>
     <section
-      class="absolute top-0 left-0 h-screen w-screen grid gap-2 bg-stone-700 text-stone-500"
+      class="absolute top-0 left-0 h-screen w-screen grid grid-rows-[3fr_2fr] gap-16 bg-stone-700 text-stone-500"
     >
-      <h1 class="justify-self-center self-end text-7xl font-black">(｡╯︵╰｡)</h1>
-      <p class="justify-self-center text-sm font-thin">
-        This webapp requires <span class="font-normal">JavaScript</span>. Sorry!
+      <div
+        class="justify-self-center self-end animate-ping h-1/5 aspect-square rounded-full bg-stone-500 opacity-75"
+      ></div>
+      <p class="justify-self-center text-sm text-center">
+        Loading...
+        <br />
+        <span class="text-xs font-thin">
+          This webapp requires
+          <span class="font-normal text-amber-500">JavaScript</span>
+        </span>
       </p>
     </section>
   </body>

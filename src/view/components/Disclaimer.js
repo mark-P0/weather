@@ -6,7 +6,7 @@ export function Disclaimer() {
     E('a', 'OpenWeatherMap', {
       href: 'https://openweathermap.org/',
       target: '_blank',
-      class: 'font-medium text-cyan-600 hover:underline',
+      class: 'font-medium text-orange-500 hover:underline',
     }),
   ]);
 }

@@ -25,7 +25,9 @@ module.exports = {
       title: '☁',
       template: './src/view/index.ejs',
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+    }),
   ],
   module: {
     rules: [

@@ -39,7 +39,10 @@ function Time() {
 
 export function LocationInfo() {
   return E('div', { class: 'grid place-items-center' }, [
-    E('h1', { class: 'relative leading-none' }, [City(), Country()]),
+    E('h1', { class: 'relative leading-none text-center' }, [
+      City(),
+      Country(),
+    ]),
     Time(),
   ]);
 }

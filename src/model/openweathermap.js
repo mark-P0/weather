@@ -21,3 +21,18 @@ export async function current(query) {
   if (!res.ok) throw json;
   return json;
 }
+
+/**
+ * https://openweathermap.org/forecast5
+ * @type {(query: string) => Promise<any>}
+ */
+export async function forecast(query) {
+  const url = new URL('https://api.openweathermap.org/data/2.5/forecast');
+  url.searchParams.append('APPID', API_KEY);
+  url.searchParams.append('q', query);
+
+  const res = await fetch(url, { mode: 'cors' });
+  const json = await res.json();
+  if (!res.ok) throw json;
+  return json;
+}

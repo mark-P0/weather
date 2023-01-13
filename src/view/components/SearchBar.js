@@ -1,8 +1,9 @@
-import { current } from 'src/model/openweathermap.js';
+import { current, forecast } from 'src/model/openweathermap.js';
 import {
   LoadingEvent,
   WeatherUpdateEvent,
   NotFoundEvent,
+  ForecastUpdateEvent,
 } from 'src/controller/events.js';
 import { E } from '../dom.js';
 import { MagnifyingGlassIcon } from '../tailwind/heroicons.js';
@@ -44,8 +45,10 @@ export function SearchBar() {
         search = 'that';
         throw search;
       }
-      const data = await current(search);
-      WeatherUpdateEvent.publish(data);
+
+      const data = await Promise.all([current(search), forecast(search)]);
+      WeatherUpdateEvent.publish(data[0]);
+      ForecastUpdateEvent.publish(data[1]);
     } catch (error) {
       NotFoundEvent.publish(search);
       console.error(error);

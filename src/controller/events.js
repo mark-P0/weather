@@ -18,3 +18,4 @@ export const WeatherUpdateEvent = new Event();
 export const TempUnitChangeEvent = new Event();
 export const TempUpdateEvent = new Event();
 export const NotFoundEvent = new Event();
+export const ForecastUpdateEvent = new Event();

@@ -2,7 +2,7 @@
  * HH:MM AP
  * @type {(date: Date) => string}
  */
-export function date2str(date) {
+export function date2time(date) {
   let hr = date.getHours();
   let min = date.getMinutes();
   let meridiem = 'AM';

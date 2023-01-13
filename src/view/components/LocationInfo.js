@@ -1,4 +1,4 @@
-import { date2str } from 'src/utilities.js';
+import { date2time } from 'src/utilities.js';
 import { WeatherUpdateEvent } from 'src/controller/events.js';
 import { E } from '../dom.js';
 
@@ -31,7 +31,7 @@ function Time() {
   WeatherUpdateEvent.subscribe(async (data) => {
     const unixEpochSecs = data?.dt ?? 0;
     const milliseconds = unixEpochSecs * 1000;
-    time.textContent = date2str(new Date(milliseconds));
+    time.textContent = date2time(new Date(milliseconds));
   });
 
   return E('p', { class: 'mt-1 text-xs font-thin' }, ['As of ', time]);

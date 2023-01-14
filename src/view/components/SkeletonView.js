@@ -51,6 +51,31 @@ function Temperature() {
   ]);
 }
 
+function Forecasts() {
+  const snippet = () =>
+    E('div', { class: 'w-1/5 aspect-3/4 grid place-items-center gap-2' }, [
+      E('div', { class: pulse('h-3 w-4/5') }),
+      E('div', { class: pulse('w-3/5 aspect-square rounded-full') }),
+      E('div', { class: pulse('h-3 w-4/5') }),
+      E('div', { class: pulse('h-3 w-2/5') }),
+    ]);
+
+  return E('div', { class: 'flex flex-col gap-2' }, [
+    E('div', { class: 'flex gap-2' }, [
+      E('div', { class: pulse('h-4 w-4/12 mr-auto') }),
+      E('div', { class: pulse('h-4 w-2/12') }),
+      E('div', { class: pulse('h-4 w-2/12') }),
+    ]),
+    E('div', { class: 'w-full col-span-2 flex justify-center' }, [
+      snippet(),
+      snippet(),
+      snippet(),
+      snippet(),
+      snippet(),
+    ]),
+  ]);
+}
+
 function Miscellaneous() {
   const cell = () => {
     const title = E('div', { class: pulse('h-3 w-5/6 col-span-2') });
@@ -76,7 +101,7 @@ export function SkeletonView() {
   const element = E(
     'div',
     { class: 'h-full flex flex-col justify-evenly hidden' },
-    [Location(), Temperature(), Miscellaneous()]
+    [Location(), Temperature(), Forecasts(), Miscellaneous()]
   );
 
   LoadingEvent.subscribe(async (status) => {

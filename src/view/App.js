@@ -1,4 +1,5 @@
 import './tailwind/styles.css';
+import './scrollbars.css';
 import { E } from './dom.js';
 import { SearchBar } from './components/SearchBar.js';
 import { ArrowPrompt } from './components/ArrowPrompt.js';

@@ -2,7 +2,7 @@ import { LoadingEvent } from 'src/controller/events.js';
 import { E } from '../dom.js';
 
 /** @type {(classes: string, bg: string) => string} */
-function pulse(classes, bg = 'bg-stone-300') {
+function pulse(classes, bg = 'bg-stone-500') {
   return `${classes} ${bg} animate-pulse `;
 }
 

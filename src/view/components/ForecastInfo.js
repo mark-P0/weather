@@ -1,9 +1,10 @@
 import { E } from '../dom.js';
 import { Radio } from './Radio.js';
 import { DailyForecast } from './DailyForecast.js';
+import { HourlyForecast } from './HourlyForecast.js';
 
 export function ForecastInfo() {
-  const forecasts = [DailyForecast(), E('code', 'hourly')];
+  const forecasts = [DailyForecast(), HourlyForecast()];
   const toggleRadios = [
     Radio('forecast', 'Daily', true),
     Radio('forecast', 'Hourly'),
@@ -26,6 +27,6 @@ export function ForecastInfo() {
       E('h2', { class: 'text-sm ' }, 'Forecasts'),
       toggles,
     ]),
-    E('div', { class: 'w-full overflow-auto' }, forecasts),
+    E('div', { class: 'w-full overflow-auto scrollbar-none' }, forecasts),
   ]);
 }

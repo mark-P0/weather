@@ -7,6 +7,7 @@
 
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, child, onValue } from 'firebase/database';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCKeBiEMQvzV0BAbOUJ0Zf1RAK41Mb_YyM',
@@ -20,6 +21,10 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LeY0-IiAAAAAPrzzMMEAasUOdrh_As6QdXdcD_l'), // cspell:disable-line
+  isTokenAutoRefreshEnabled: true,
+});
 
 /**
  * https://firebase.google.com/docs/database/web/read-and-write#read_data_once

@@ -1,47 +1,23 @@
-import { kelvin2celsius, kelvin2fahrenheit } from 'src/utilities.js';
 import {
   WeatherUpdateEvent,
   TempUnitChangeEvent,
-  TempUpdateEvent,
 } from 'src/controller/events.js';
 import { E } from '../dom.js';
 import { Radio } from './Radio.js';
-
-/** @type {kelvin2celsius | kelvin2fahrenheit} */
-let converter = kelvin2celsius;
-TempUnitChangeEvent.subscribe(async (data) => {
-  if (data === 'C') converter = kelvin2celsius;
-  else if (data === 'F') converter = kelvin2fahrenheit;
-  else return;
-  TempUpdateEvent.publish(null);
-});
-
-/** @type {(data: number | undefined) => string} */
-function data2temp(data) {
-  if (!data) return '...';
-  return Math.round(converter(data)) + '°';
-}
+import { Temperature } from './temperature.js';
 
 function MinMax() {
-  const min = E('span', { class: 'text-stone-500 font-normal' });
-  const max = E('span', { class: 'text-stone-500 font-normal' });
-
-  let minBase;
-  let maxBase;
-  const updateTemp = async () => {
-    min.textContent = data2temp(minBase);
-    max.textContent = data2temp(maxBase);
-  };
+  const minmax = () => E('span', { class: 'text-stone-500 font-normal' });
+  const min = new Temperature(minmax());
+  const max = new Temperature(minmax());
   WeatherUpdateEvent.subscribe(async (data) => {
-    minBase = data?.main?.temp_min;
-    maxBase = data?.main?.temp_max;
-    updateTemp();
+    min.value = data?.main?.temp_min;
+    max.value = data?.main?.temp_max;
   });
-  TempUpdateEvent.subscribe(updateTemp);
 
   return E('p', { class: 'flex gap-2 text-xs font-thin text-stone-400' }, [
-    E('span', 'Min ', [min]),
-    E('span', 'Max ', [max]),
+    E('span', 'Min ', [min.element]),
+    E('span', 'Max ', [max.element]),
   ]);
 }
 
@@ -63,32 +39,22 @@ function Description() {
 }
 
 function FeelsLike() {
-  const temp = E('span', { class: 'text-sm font-semibold text-stone-500' });
-
-  let tempBase;
-  const updateTemp = async () => {
-    temp.textContent = data2temp(tempBase);
-  };
+  const temp = new Temperature(
+    E('span', { class: 'text-sm font-semibold text-stone-500' })
+  );
   WeatherUpdateEvent.subscribe(async (data) => {
-    tempBase = data?.main?.feels_like;
-    updateTemp();
+    temp.value = data?.main?.feels_like;
   });
-  TempUpdateEvent.subscribe(updateTemp);
 
   return E('p', { class: 'text-xs font-thin text-stone-400' }, [
     'Feels like ',
-    temp,
+    temp.element,
   ]);
 }
 
 function MainTemp() {
   const img = E('img', { alt: 'Weather icon' });
-  const temp = E('h2', { class: 'text-4xl font-bold ml-3' });
-
-  let tempBase;
-  const updateTemp = async () => {
-    temp.textContent = data2temp(tempBase);
-  };
+  const temp = new Temperature(E('h2', { class: 'text-4xl font-bold ml-3' }));
   WeatherUpdateEvent.subscribe(async (data) => {
     const iconID = data?.weather?.[0]?.icon;
     if (iconID) {
@@ -96,10 +62,8 @@ function MainTemp() {
       img.setAttribute('src', iconURL);
     }
 
-    tempBase = data?.main?.temp;
-    updateTemp();
+    temp.value = data?.main?.temp;
   });
-  TempUpdateEvent.subscribe(updateTemp);
 
   const buttons = E(
     'div',
@@ -111,7 +75,7 @@ function MainTemp() {
     TempUnitChangeEvent.publish(target.textContent);
   });
 
-  return E('div', { class: 'flex items-center' }, [img, temp, buttons]);
+  return E('div', { class: 'flex items-center' }, [img, temp.element, buttons]);
 }
 
 export function TempInfo() {

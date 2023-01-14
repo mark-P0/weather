@@ -1,4 +1,5 @@
 const dateFormatter = new Intl.DateTimeFormat('en-us', { dateStyle: 'medium' });
+const timeFormatter = new Intl.DateTimeFormat('en-us', { timeStyle: 'short' });
 
 /**
  * `MMM DD`
@@ -17,21 +18,7 @@ export function date2str(date) {
  * @type {(date: Date) => string}
  */
 export function date2time(date) {
-  let hr = date.getHours();
-  let min = date.getMinutes();
-  let meridiem = 'AM';
-
-  if (hr >= 12) {
-    hr -= 12;
-    meridiem = 'PM';
-  }
-  if (hr === 0) {
-    hr = 12;
-  }
-
-  min = `${min}`.padStart(2, '0');
-
-  return `${hr}:${min} ${meridiem}`;
+  return timeFormatter.format(date);
 }
 
 /**

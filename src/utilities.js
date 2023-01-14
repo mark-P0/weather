@@ -1,3 +1,17 @@
+const dateFormatter = new Intl.DateTimeFormat('en-us', { dateStyle: 'medium' });
+
+/**
+ * `MMM DD`
+ *
+ * The formatter returns a date in the format `MMM DD, YYYY`.
+ * This function excludes the last six characters from that result. (`, YYYY`)
+ *
+ * @type {(date: Date) => string}
+ */
+export function date2str(date) {
+  return dateFormatter.format(date).slice(0, -(1 + 1 + 4));
+}
+
 /**
  * HH:MM AP
  * @type {(date: Date) => string}

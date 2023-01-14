@@ -1,18 +1,7 @@
+import { date2str } from 'src/utilities.js';
 import { ForecastUpdateEvent } from 'src/controller/events.js';
 import { E } from '../dom.js';
 import { ForecastSnippet } from './ForecastSnippet.js';
-
-const dateFormatter = new Intl.DateTimeFormat('en-us', { dateStyle: 'medium' });
-/**
- * `MMM DD`
- *
- * The formatter returns a date in the format `MMM DD, YYYY`.
- * This function excludes the last six characters from that result. (`, YYYY`)
- * @type {(date: Date) => string}
- */
-function date2str(date) {
-  return dateFormatter.format(date).slice(0, -(1 + 1 + 4));
-}
 
 export function DailyForecast() {
   const element = E('div', { class: 'flex [&>*]:flex-shrink-0' });
